@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colleague Memory Task</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    img {
+      max-width: 60%;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      margin-bottom: 20px;
+    }
+    .button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div id="content"></div>
+  <button class="button" onclick="nextPage()">Next</button>
+
+  <script>
+    const pages = [
+      {
+        type: "image",
+        src: "colleague1.png",
+        text: "Meet Alex and Sofia! Alex is a senior manager, and Sofia leads our operations."
+      },
+      {
+        type: "text",
+        text: "Alex is great at planning big projects and working with clients."
+      },
+      {
+        type: "text",
+        text: "Sofia is super organized and helps the team stay on track."
+      },
+      {
+        type: "quiz",
+        text: "What is Alex’s role, and what is he especially good at?"
+      },
+      {
+        type: "quiz",
+        text: "What does Sofia help with in the team?"
+      }
+    ];
+
+    let currentPage = 0;
+
+    function renderPage() {
+      const contentDiv = document.getElementById("content");
+      contentDiv.innerHTML = "";
+      const page = pages[currentPage];
+
+      if (page.type === "image") {
+        const img = document.createElement("img");
+        img.src = page.src;
+        img.alt = "Colleagues";
+        contentDiv.appendChild(img);
+      }
+
+      const p = document.createElement("p");
+      p.textContent = page.text;
+      p.style.fontSize = "20px";
+      p.style.marginTop = "10px";
+      contentDiv.appendChild(p);
+
+      if (currentPage === pages.length - 1) {
+        document.querySelector("button").style.display = "none";
+      }
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        currentPage++;
+        renderPage();
+      }
+    }
+
+    // Initial render
+    renderPage();
+  </script>
+</body>
+</html>
